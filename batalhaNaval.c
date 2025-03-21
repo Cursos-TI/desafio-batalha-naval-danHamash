@@ -31,11 +31,21 @@ void posicionarNavio(int tabuleiro[10][10], int linha, int coluna, char direcao)
             tabuleiro[linha][coluna + i] = 3;
         }
     }
+    
     // Verifica se o navio pode ser posicionado verticalmente e dentro dos limites do tabuleiro 
     else if (direcao == 'V' && linha + 3 <= 10) {
         // Preenche as posições do navio verticalmente
         for (int i = 0; i < 3; i++) {
             tabuleiro[linha + i][coluna] = 3;
+        }
+
+    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
+    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
+    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
+    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
+    }else if (direcao == 'D' && linha - 2 >= 0 && coluna + 3 <= 10) {
+        for (int i = 0; i < 3; i++) {
+            tabuleiro[linha - i][coluna + i] = 3;
         }
     }
 }
@@ -70,11 +80,10 @@ int main() {
     inicializarTabuleiro(tabuleiro);
 
     // Posiciona os navios no tabuleiro de forma manual
-    // Navio horizontal começa na linha 2, coluna 3 (ocupando as posições 2,D 2,E e 2,F)
-    posicionarNavio(tabuleiro, 2, 3,  'H'); 
-
-    // Navio vertical começa na linha 7, coluna 8 (ocupando as posições 7,I, 8,I e 9,I)
-    posicionarNavio(tabuleiro, 7, 8,  'V'); 
+    posicionarNavio(tabuleiro, 2, 3, 'H');  // Horizontal
+    posicionarNavio(tabuleiro, 7, 8, 'V');  // Vertical
+    posicionarNavio(tabuleiro, 8, 2, 'D');  // Diagonal 
+    posicionarNavio(tabuleiro, 6, 2, 'D');  // Diagonal
 
     // Exibe o tabuleiro formatado após o posicionamento dos navios
     exibirTabuleiro(tabuleiro);
@@ -82,10 +91,7 @@ int main() {
     return 0;
 }
 
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
+    
 
     // Nível Mestre - Habilidades Especiais com Matrizes
     // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
