@@ -49,6 +49,42 @@ void posicionarNavio(int tabuleiro[10][10], int linha, int coluna, char direcao)
         }
     }
 }
+//Habilidades adicionadas
+void posicionarHabilidade(int tabuleiro[10][10], int linha, int coluna, char tipo) {
+    if (tipo == 'C') { // Cone
+        for (int i = 0; i < 3; i++) {
+            for (int j = -i; j <= i; j++) {
+                int x = linha + i;
+                int y = coluna + j;
+                if (x >= 0 && x < 10 && y >= 0 && y < 10) {
+                    tabuleiro[x][y] = 5;  // Valor 5 representa a habilidade
+                }
+            }
+        }
+    }
+    else if (tipo == 'X') { // Cruz
+        for (int i = -2; i <= 2; i++) {
+            int x1 = linha + i;
+            int y1 = coluna;
+            int x2 = linha;
+            int y2 = coluna + i;
+            if (x1 >= 0 && x1 < 10) tabuleiro[x1][y1] = 5;
+            if (y2 >= 0 && y2 < 10) tabuleiro[x2][y2] = 5;
+        }
+    }
+    else if (tipo == 'O') { // Octaedro
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                int x = linha + i;
+                int y = coluna + j;
+                if (x >= 0 && x < 10 && y >= 0 && y < 10) {
+                    if (i == 0 || j == 0) tabuleiro[x][y] = 5;
+                }
+            }
+        }
+    }
+}
+
 // imprime o tabuleiro, formatando as colunas com letras de 'A' a 'J'.
 void exibirTabuleiro(int tabuleiro[10][10]) {
 
@@ -84,6 +120,13 @@ int main() {
     posicionarNavio(tabuleiro, 7, 8, 'V');  // Vertical
     posicionarNavio(tabuleiro, 8, 2, 'D');  // Diagonal 
     posicionarNavio(tabuleiro, 6, 2, 'D');  // Diagonal
+
+    
+
+    // Posicionamento das habilidades
+    // posicionarHabilidade(tabuleiro, 6, 6, 'C');  // Cone
+    // posicionarHabilidade(tabuleiro, 6, 6, 'X');  // Cruz
+    posicionarHabilidade(tabuleiro, 6,6, 'O');  // Octaedro
 
     // Exibe o tabuleiro formatado após o posicionamento dos navios
     exibirTabuleiro(tabuleiro);
